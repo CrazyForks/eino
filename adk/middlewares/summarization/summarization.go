@@ -154,8 +154,11 @@ func (m *middleware) BeforeModelRewriteState(ctx context.Context, state *adk.Cha
 
 	if m.cfg.EmitInternalEvents {
 		err = m.emitEvent(ctx, &CustomizedAction{
-			Type:   ActionTypeBeforeSummary,
-			Before: &BeforeSummaryAction{Messages: state.Messages},
+			Type: ActionTypeBeforeSummary,
+			Before: &BeforeSummaryAction{
+				Messages: state.Messages,
+				Tools:    tools,
+			},
 		})
 		if err != nil {
 			return nil, nil, err
@@ -210,8 +213,11 @@ func (m *middleware) BeforeModelRewriteState(ctx context.Context, state *adk.Cha
 
 	if m.cfg.EmitInternalEvents {
 		err = m.emitEvent(ctx, &CustomizedAction{
-			Type:  ActionTypeAfterSummary,
-			After: &AfterSummaryAction{Messages: state.Messages},
+			Type: ActionTypeAfterSummary,
+			After: &AfterSummaryAction{
+				Messages: state.Messages,
+				Tools:    tools,
+			},
 		})
 		if err != nil {
 			return nil, nil, err

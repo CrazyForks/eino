@@ -18,6 +18,7 @@ package summarization
 
 import (
 	"github.com/cloudwego/eino/adk"
+	"github.com/cloudwego/eino/schema"
 )
 
 type CustomizedAction struct {
@@ -36,9 +37,15 @@ type CustomizedAction struct {
 type BeforeSummaryAction struct {
 	// Messages is the original state messages before summarization.
 	Messages []adk.Message `json:"messages,omitempty"`
+
+	// Tools is the available tools in the ChatModelAgent.
+	Tools []*schema.ToolInfo `json:"tools,omitempty"`
 }
 
 type AfterSummaryAction struct {
 	// Messages is the final state messages after summarization.
 	Messages []adk.Message `json:"messages,omitempty"`
+
+	// Tools is the available tools in the ChatModelAgent.
+	Tools []*schema.ToolInfo `json:"tools,omitempty"`
 }
